@@ -30,15 +30,27 @@ a:visited {
 
 header {
   padding: 40px;
-  text-align: center;
+  /* text-align: center; */
   background: var(--primary);
   color: var(--light);
+}
+.fontHeader{
+background-color: rgb(209, 248, 208);
+color: black;
+width: fit-content;
+padding-right: 10px;
+padding-left: 10px;
+margin-right: 25px;
+border-radius: 0.3rem;
+box-shadow: 6px 6px rgb(153, 152, 152);
+font-size: 50px;
 }
 
 main {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
+  background-color: rgb(209, 248, 208);
 }
 
 aside {
@@ -52,6 +64,10 @@ aside {
 nav {
   display: flex;
   background-color: var(--secondary);
+  margin-bottom: 15px;
+  gap: 10px;
+  font-size: 25px;
+  color: rgb(209, 248, 208);
 }
 
 nav a {
@@ -61,10 +77,10 @@ nav a {
   text-align: center;
 }
 
-nav a:hover {
+/* nav a:hover {
   color: var(--secondary);
-  background-color: var(--dark);
-}
+  background-color: var(--light);
+} */
 
 .gallery {
   flex: 4;
@@ -79,12 +95,12 @@ nav a:hover {
 .btn-no-style {
   background: none;
   border: none;
-  padding: 0;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 100%;
-  transition: color 0.1s;
-  margin-left: 16px;
+ color: rgb(209, 248, 208);
+}
+
+.btn-no-style :hover{
+  color: var(--secondary);
+  background-color: var(--light);
 }
 
 img {
@@ -95,7 +111,7 @@ img {
 .painting {
   width: 50%;
   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;;
   margin-bottom: 25px;
 }
 
@@ -106,16 +122,16 @@ img {
 }
 
 /* CARDS */
-.card {
+/* .card {
   margin: 20px;
   flex: 0 1 300px;
   border: 7px double var(--dark);
   border-radius: 10px;
   background-color: var(--light);
   color: var(--dark);
-}
+} */
 
-.login-card {
+/* .login-card {
   margin: 0 0 20px 0;
   flex: 0 0 50%;
   max-width: 50%;
@@ -126,6 +142,26 @@ img {
   border-width: thick;
   background-color: #577a7c;
   color: var(--light);
+} */
+.loginHeader{
+color: black;
+background-color: rgb(209, 248, 208);
+}
+
+.loginCard{
+  width: 500%;
+  margin-left: 55px;
+  margin-top: 25px;
+}
+
+.loginBtn{
+  font-size: 35px;
+  height: 65px;
+  font-weight: bold;
+}
+
+.signupBtn{
+  font-weight: bold;
 }
 
 .card header {
@@ -133,7 +169,7 @@ img {
   font-weight: bold;
   text-transform: uppercase;
   margin: 0;
-  background-color: var(--tertiary);
+  background-color:  rgb(209, 248, 208);
   padding: 0.625rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
