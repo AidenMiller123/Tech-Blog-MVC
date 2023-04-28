@@ -1,7 +1,5 @@
 <div class="container post-container">
-{{#each posts as |post| }}
-<a href="/post/{{post.id}}">
-    <div class="card postCard">
+<div class="card postCard">
         <div class="card-header">
             <div class="">
             <h3 class="post-title"> {{post.title}}</h3>
@@ -14,5 +12,4 @@
             {{post.content}}
         </div>
     </div>
-{{/each}}
 </div>
