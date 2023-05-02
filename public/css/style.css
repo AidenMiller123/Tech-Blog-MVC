@@ -166,6 +166,12 @@ background-color: rgb(209, 248, 208);
   font-weight: bold;
 }
 
+.postBtn{
+  font-size: 30px;
+  height: 65px;
+  font-weight: bold;
+}
+
 .postText{
   font-size: 15px;
   /* margin-top: 8px; */
@@ -176,9 +182,15 @@ background-color: rgb(209, 248, 208);
   float: left;
 }
 
+.post-title:not(.postCard1):hover {
+  color: var(--quatrinary)
+}
+
 .postCard{
-  width: 200%;
+  width: 900px;
   margin-bottom: 45px;
+  margin-left: 100px;
+  height: 100%;
 }
 
 .card-header {
@@ -193,13 +205,19 @@ background-color: rgb(209, 248, 208);
   font-weight: bold; */
   padding: 5px;
   margin: 5px;
+ 
 }
 
 .post-card{
 width: 100%;
 border: 3px solid #1a1a1a;
   margin-bottom: 1rem;
+  color: var(--quatrinary);
 }
+
+/* .postCard1:hover{
+  color: var(--quatrinary);
+} */
 
 
 .gallery-name {
@@ -225,4 +243,29 @@ border: 3px solid #1a1a1a;
 
 .post-container{
 padding-left: 350px;
+}
+
+textarea {
+  width: 850px;
+  height: 100px;
+  margin-top: 15px;
+}
+
+.newPostBtn{
+  font-size: 25px;
+}
+
+.dashboard-container{
+  margin-top: 15px;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
 }

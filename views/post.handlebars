@@ -1,10 +1,10 @@
 <div class="container post-container">
-<div class="card postCard">
+    <div class="card postCard">
         <div class="card-header">
             <div class="">
-            <h3 class="post-title"> {{post.title}}</h3>
+                <h3 class="post-title postCard1"> {{post.title}}</h3>
                 <div class="">
-                <p class="postText">Posted by {{user.username}} on {{format_date post.date_created}}</p>
+                    <p class="postText">Posted by {{post.user.username}} on {{format_date post.date_created}}</p>
                 </div>
             </div>
         </div>
@@ -12,4 +12,44 @@
             {{post.content}}
         </div>
     </div>
+
+    <div class="commentBox">
+        {{#each comments as |comment|}}
+        <div class="card postCard">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                {{comment.content}}
+            </div>
+            <div class="">
+                <p class="ml-4">- {{comment.user.username}} {{format_date comment.date_created}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="addComment">
+        <form class="form comment-form">
+
+            <div class="card postCard">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <div class="">Comment :</div>
+                    <textarea class="form-input " type="text" id="comment"></textarea>
+                    <button class="commentBtn btn">Add Comment</button>
+                    <div class="form-group" style="display:none;">
+                        <p id="postId">{{post.id}}</p>
+                    </div>
+                    <div class="form-group" style="display:none;">
+                        <p id="userId">{{user.id}}</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script src="./js/comment.js"></script>

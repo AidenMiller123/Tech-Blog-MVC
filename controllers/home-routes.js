@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
@@ -31,16 +31,58 @@ router.get('/', async (req, res) => {
 
 router.get('/post/:id', withAuth, async (req, res) => {
   try {
-    const dbPostData = await Post.findByPk(req.params.id);
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [
+        { 
+          model: User,
+          attributes: ['username'],
+        },
+        ],
+    });
+    
 
     const post = dbPostData.get({ plain: true });
 
-    res.render('post', { post, loggedIn: req.session.loggedIn });
+
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+      where: {
+        post_id: req.params.id
+      }
+    })
+
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+    res.render('post', { 
+      post,
+      comments,
+     loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 })
+
+router.post('/post/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.create({ 
+       ...req.body, 
+      user_id: req.session.userId, 
+      post_id: req.params.id,
+       });
+
+    req.session.save(() => {
+      res.status(200).json(commentData);
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 
 
@@ -48,17 +90,69 @@ router.get('/post/:id', withAuth, async (req, res) => {
 // Use the custom middleware before allowing the user to access the gallery
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+    // // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Post}],
     });
 
-    // const user = userData.get({ plain: true });
+    const postData = await Post.findAll();
 
-    res.render('dashboard', { loggedIn: req.session.loggedIn });
+    const user = userData.get({ plain: true });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    const post = posts.filter(post => {
+      return [post.user_id === req.session.user_id]
+    });
+
+
+    res.render('dashboard', { 
+      layout: 'dashboardHeader' ,
+      user,
+      post,
+      loggedIn: req.session.loggedIn, 
+    });
   } catch (err) {
     res.status(500).json(err);
+  }
+
+});
+
+router.get('/dashboard/createPost',  withAuth, async (req, res) => {
+  try {
+    // // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+
+
+    const user = userData.get({ plain: true });
+
+
+    res.render('createPost', { 
+      layout: 'dashboardHeader' ,
+      user,
+      loggedIn: req.session.loggedIn, 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+ 
+    
+});
+
+
+router.post('/dashboard/createPost', async (req, res) => {
+
+  try {
+    const postData = await Post.create({ ...req.body, user_id: req.session.user_id });
+
+    req.session.save(() => {
+      res.status(200).json(postData);
+    });
+  } catch (err) {
+    res.status(400).json(err);
   }
 
 });
