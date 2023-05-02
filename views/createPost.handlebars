@@ -1,0 +1,24 @@
+<div class="loginCard">
+    <div class="card">
+        <h2 class="card-header loginHeader">Create Post</h2>
+        <form class="form post-form p-2">
+            <div class="form-group pb-2">
+                <label for="post-title">Title:</label>
+                <input class="form-input " type="text" id="post-title" />
+            </div>
+            <div class="form-group pb-2">
+                <label for="postContent">Content:</label>
+                <textarea class="form-input " type="text" id="postContent"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-block postBtn" type="submit">Create</button>
+            </div>
+            <div class="form-group" style="display:none;">
+                <p id="userId">{{user.id}}</p>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script src="/js/createPost.js"></script>
