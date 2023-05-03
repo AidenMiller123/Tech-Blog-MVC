@@ -35,7 +35,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
       include: [
         { 
           model: User,
-          attributes: ['username'],
+          // attributes: ['username', 'id'],
         },
         ],
     });
@@ -68,21 +68,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
   }
 })
 
-router.post('/post/:id', async (req, res) => {
-  try {
-    const commentData = await Comment.create({ 
-       ...req.body, 
-      user_id: req.session.userId, 
-      post_id: req.params.id,
-       });
 
-    req.session.save(() => {
-      res.status(200).json(commentData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
 
 
 
@@ -96,21 +82,23 @@ router.get('/dashboard', withAuth, async (req, res) => {
       include: [{ model: Post}],
     });
 
-    const postData = await Post.findAll();
+    const postData = await Post.findAll({
+      where: {
+        user_id: req.session.user_id
+      }
+    });
 
     const user = userData.get({ plain: true });
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    const post = posts.filter(post => {
-      return [post.user_id === req.session.user_id]
-    });
+    
 
 
     res.render('dashboard', { 
       layout: 'dashboardHeader' ,
       user,
-      post,
+      posts,
       loggedIn: req.session.loggedIn, 
     });
   } catch (err) {
@@ -119,43 +107,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 });
 
-router.get('/dashboard/createPost',  withAuth, async (req, res) => {
-  try {
-    // // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-    });
-
-
-    const user = userData.get({ plain: true });
-
-
-    res.render('createPost', { 
-      layout: 'dashboardHeader' ,
-      user,
-      loggedIn: req.session.loggedIn, 
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
- 
-    
-});
-
-
-router.post('/dashboard/createPost', async (req, res) => {
-
-  try {
-    const postData = await Post.create({ ...req.body, user_id: req.session.user_id });
-
-    req.session.save(() => {
-      res.status(200).json(postData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-
-});
 
 
 router.get('/login', (req, res) => {
