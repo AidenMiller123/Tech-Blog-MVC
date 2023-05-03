@@ -14,7 +14,6 @@
   
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Tests](#tests)
   - [Questions](#questions)
   - [License](#license)
   
@@ -40,14 +39,6 @@
   ![image](https://user-images.githubusercontent.com/123018143/235828921-eedbcf81-47fe-4830-8d28-ade916b8bfbf.png)
 
 
-  
-  
-
-  ## Tests
-
-  ```
-  npm run test
-  ```
 
   
   ## Questions
