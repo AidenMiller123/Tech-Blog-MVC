@@ -7,18 +7,18 @@ const postdata = [
     user_id: 1,
   },
   {
-    title: 'Example Post 2',
-    content: 'Example content 2',
+    title: 'Javascript Creating Arrays',
+    content: 'In Javascript you can create an array using square brackets "[array]"',
     user_id: 1,
   },
   {
-    title: 'Example Post 3',
-    content: 'Example content 3',
+    title: 'HTML Making a button',
+    content: 'HTML makes it simple for the user to create a button by making a tag like such "<button> </button>"',
     user_id: 2,
   },
   {
-    title: 'Example Post 4',
-    content: 'Example content 4',
+    title: 'SQL Select all from a table',
+    content: 'to select all from a table in a database in SQL you can use the following line " SELECT * FROM <tablename>"',
     user_id: 3,
   },
 ];

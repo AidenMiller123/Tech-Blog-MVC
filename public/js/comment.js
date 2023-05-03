@@ -1,14 +1,14 @@
-var PostId = document.getElementById("postId").textContent;
-var UserId = document.getElementById("userId").textContent;
+const PostId = document.getElementById("postId").textContent;
+const UserId = document.getElementById("userId").textContent;
 
 const commentFormHandler = async (event) => {
 
     let content = document.getElementById('comment').value;
-    let userId = document.getElementById("userId").textContent
-    let id = document.getElementById("postId").textContent
+    let user_Id = document.getElementById("userId").textContent
+    let post_Id = document.getElementById("postId").textContent
 
-    if (content) {
-        const response = await fetch(`/post/${PostId}`, {
+    if (content ) {
+        const response = await fetch(`/api/post/${PostId}`, {
             method: 'POST',
             body: JSON.stringify({ content }),
             headers: { 'Content-Type': 'application/json' },
@@ -19,6 +19,7 @@ const commentFormHandler = async (event) => {
 
         } else {
             alert(response.statusText);
+
         }
     }
 

@@ -1,0 +1,26 @@
+<div class="loginCard">
+    <div class="card">
+        <h2 class="postCard1">Update Post</h2>
+        <form class="form update-form p-2">
+            <div class="form-group pb-2">
+                <label for="post-title">Title:</label>
+                <input class="form-input " type="text" id="update-title" value="{{post.title}}" />
+            </div>
+            <div class="form-group pb-2">
+                <label for="postContent">Content:</label>
+                <textarea class="form-input " type="text" id="updateContent">{{post.content}}</textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-block postBtn" type="submit">Update</button>
+            </div>
+            <div class="form-group" style="display:none;">
+                <p id="userId">{{user.id}}</p>
+            </div>
+            <div class="form-group" style="display:none;">
+                <p id="updatePostId">{{post.id}}</p>
+            </div>
+        </form>
+    </div>
+
+</div>
+<script src="/js/updatePost.js"></script>

@@ -4,15 +4,15 @@ const postFormHandler = async (event) => {
     let content = document.getElementById('postContent').value;
     let user_id = document.getElementById("userId").textContent
 
-    if (title && content && user_id) {
-        const response = await fetch(`/dashboard/createPost`, {
+    if (title && content) {
+        const response = await fetch(`/api/dashboard/createPost`, {
             method: 'POST',
-            body: JSON.stringify({ title, content, user_id}),
+            body: JSON.stringify({ title, content}),
             headers: { 'Content-Type': 'application/json' },
         });
 
         if (response.ok) {
-            document.location.replace(`/dashboard`);
+            document.location.replace(`/`);
 
         } else {
             alert(response.statusText);
